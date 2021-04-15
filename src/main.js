@@ -48,7 +48,7 @@ function generateMD() {
     let tagCount = 0;
     for (const tag in tags) {
         if (Object.hasOwnProperty.call(tags, tag)) {
-            tagOutput += '\t- ' + tag + '\n'
+            tagOutput += '  ' + tag + '\n'
             tagCount++;
         }
     }
