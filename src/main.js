@@ -39,7 +39,7 @@ const outputContainer = document.querySelector('#output');
 
 let lastURL = '';
 function generateMD() {
-    let date = new Date(dateInput.value + 'T09:00:00.000-05:00');
+    let date = new Date(dateInput.value + 'T07:00:00.000-05:00');
     let URL = titleInput.value.toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/(\s|:)/ig, '-');
     while (URL.match(/--/g)) URL = URL.replace(/--/g, '-')
     console.log(date, URL);
