@@ -36,11 +36,14 @@ for (let index = 0; index < tagButtons.length; index++) {
 
 const outputContainer = document.querySelector('#output');
 
+function sanitize (string) {
+	return string.trim().replace(/"/g, '\\"');
+}
 
 let lastURL = '';
 function generateMD() {
     let date = new Date(dateInput.value + 'T07:00:00.000-05:00');
-    let URL = titleInput.value.toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/(\s|:)/ig, '-');
+    let URL = titleInput.value.trim().toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/(\s|:)/ig, '-');
     while (URL.match(/--/g)) URL = URL.replace(/--/g, '-')
     console.log(date, URL);
 
@@ -48,7 +51,7 @@ function generateMD() {
     let tagCount = 0;
     for (const tag in tags) {
         if (Object.hasOwnProperty.call(tags, tag)) {
-            tagOutput += '  - ' + tag + '\n'
+            tagOutput += '  - ' + tag.trim() + '\n'
             tagCount++;
         }
     }
@@ -60,10 +63,10 @@ function generateMD() {
     const output = `---
 templateKey: blog-post
 public: true
-url: ${URL}
-title: ${titleInput.value}
+url: "${sanitize(URL)}"
+title: "${sanitize(titleInput.value)}"
 date: ${date.getTime()}
-description: ${descriptionInput.value}
+description: "${sanitize(descriptionInput.value)}"
 featuredpost: false
 featuredimage: /img/orchid-text.png
 tags:
